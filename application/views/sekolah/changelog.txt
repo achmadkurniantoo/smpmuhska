@@ -1,0 +1,10 @@
+List update terkini :
+
+- Navbar dan Footer menggunakan Include.
+- Header baru di setiap halaman
+- Pemisahan setiap kategori class dalam custom.css
+- penyesuaian warna
+- perbaikan link 
+- perbaikan bug warna paragraf
+- penambahan page prestasi dan staff
+- perbaikan navbar dan footer

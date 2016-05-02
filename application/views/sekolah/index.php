@@ -20,8 +20,8 @@
 
     <!-- Custom Fonts -->
      <link href="<?php echo base_url()?>assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-     <link href='https://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css'>
-     <link href='https://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
+     <link href="https://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css">
+     <link href="https://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css">
      <!-- <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"> -->
 
 

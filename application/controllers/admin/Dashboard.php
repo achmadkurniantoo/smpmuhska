@@ -927,7 +927,7 @@ class Dashboard extends CI_Controller
      {
      	$this->print_model->reset();
      	$this->session->set_flashdata('message','Data semua sudah direset');
-        redirect('admin/dashboard/pendaftaran');
+        redirect('admin/dashboard/pendaftaranf');
      }
 
 }

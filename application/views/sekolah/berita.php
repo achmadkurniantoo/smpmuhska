@@ -37,19 +37,27 @@
             padding-bottom: 10px;
             margin-bottom: 15px;
             border-bottom: 4px solid #DDD;
-            font-family: 'Droid Arabic Naskh', serif;
+            
+        }
+
+        .headpost a{
+            color: #353232;
         }
 
         .headpost .bottomtitle {
             line-height: normal;
             text-transform: uppercase;
-            margin-top: 10px;
+            margin-top: 2px;
             margin-bottom: 5px;
             font-weight: bold;
             color: #999;
             font-size: 11px;
-            font-family: 'Droid Arabic Naskh', serif;
+            
 
+        }
+
+        .headpost .bottomtitle a{
+            color: black;
         }
     </style>
 

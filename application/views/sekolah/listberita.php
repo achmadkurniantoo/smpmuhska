@@ -80,16 +80,29 @@
             background: #F6F6F6;
 
         }
+        .tere .thumbnails{
 
-        .tere .a {
-            color :black;
+            position: relative;
+            
+            overflow: hidden;
+            float: left;
+            margin-right: 15px;
+            padding-bottom: 10px;
+            margin-top: 10px;
 
+        }
+
+        .tere a{
+            color: #353232;
         }
 
         #boxid {
             
             overflow: hidden;
-            
+            padding-top: 5px;
+            padding-right: 295px;
+            padding-left: 295px;
+            padding-bottom: 35px;
 
         }
     </style>
@@ -129,11 +142,11 @@ include ("navbar.php");
         if ($num % 2) { ?>
 
             <div class="container-news-main-gray">
-                <?php $hsl = (String) $key->isi;  echo html_entity_decode($hsl);?>  
+                <p><?php $hsl = (String) $key->isi;  echo html_entity_decode($hsl);?> </p> 
             </div>
         <?php }else{ ?>
             <div class="container-news-main-white">
-                <?php $hsl = (String) $key->isi;  echo html_entity_decode($hsl);?>  
+                <p><?php $hsl = (String) $key->isi;  echo html_entity_decode($hsl);?> </p> 
             </div>
 
 <?php } $num++; } } else{ ?>
@@ -146,10 +159,10 @@ include ("navbar.php");
                         $str = html_entity_decode($key->isi);
                         preg_match('/(<img[^>]+>)/i', $str, $matches);
                     ?>
-                    <a href="<?php echo base_url().'sekolah/baca/'.$key->kategori. "/".$key->id_akademik ?>">
-                        
+                    
+                        <a href="<?php echo base_url().'sekolah/baca/'.$key->kategori. "/".$key->id_akademik ?>">
                             <?php if ($matches != NULL) { ?>
-                                <div class="limiter thumbnail">
+                                <div class="limiter thumbnails">
                                 <?php echo $matches[0];?>
                                 
                             <?php }?>
@@ -161,7 +174,7 @@ include ("navbar.php");
                     </div>
                     <?php $aa = strip_tags(html_entity_decode($key->isi));?>
                     <div class="exp"><?=substr($aa, 0,400)?>...</div>
-                     <div align="right"><?=anchor('sekolah/baca/'.$key->kategori. "/".$key->id_akademik ,'Read more!!',['class'=>'btn btn-primary'])?></div>
+                     <div align="right"><?=anchor('sekolah/baca/'.$key->kategori. "/".$key->id_akademik ,'Baca Selengkapnya..',['class'=>'btn btn-success'])?></div>
                 </div>
             </div>
     <?php } }?>

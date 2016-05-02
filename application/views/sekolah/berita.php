@@ -43,6 +43,9 @@
         .headpost a{
             color: #353232;
         }
+        .headpost a:hover{
+            color: green;
+        }
 
         .headpost .bottomtitle {
             line-height: normal;
@@ -56,9 +59,19 @@
 
         }
 
-        .headpost .bottomtitle a{
+        .artikels{ 
             color: black;
         }
+
+        .artikels a {
+            color: black;
+
+        }
+        .artikels a:hover{
+            color: green;
+        }
+
+
     </style>
 
 </head>
@@ -105,9 +118,9 @@ include ("navbar.php");
                         </div>
                     </div>
                     
-                   
+                   <div class="artikels">
                     <?php $hsl = (String) $key->isi;  echo html_entity_decode($hsl);?> 
-
+                   </div>
                     
                 <?php } ?>
 

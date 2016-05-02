@@ -409,7 +409,7 @@ hr{
 	padding-right: 295px;
 	padding-left: 295px;
 	padding-bottom: 35px;
-	font-family: 'Droid Arabic Kufi';
+	
 }
 .container-news-main-white p{
 	font-family: opensansreg;}
@@ -523,7 +523,9 @@ footer {
 
 }
 
-.containerfooter p,ul,h4,a{
+
+
+.containerfooter p, ul ,li ,h4, a{
   font-family: opensansreg;
   color: white;
 }

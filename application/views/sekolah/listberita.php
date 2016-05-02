@@ -80,15 +80,23 @@
             background: #F6F6F6;
 
         }
-        .tere .thumbnails{
 
+        .tere img{
+            width: 300px;
+            height: 200px;
+            border-radius: 8px;
+
+        }
+
+        .tere .thumbnails{
+            border: 1px solid #ddd;
             position: relative;
-            
             overflow: hidden;
             float: left;
             margin-right: 15px;
-            padding-bottom: 10px;
+            padding: 5px;
             margin-top: 10px;
+            border-radius: 8px;
 
         }
 

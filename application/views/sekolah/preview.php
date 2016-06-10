@@ -8,8 +8,8 @@
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>SMP Muhammadiyah 10</title>
+    <link rel="icon" href="<?php echo base_url() ;?>assets/img/icon1.png" type="image/gif" >
+    <title>Pendaftaran</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url()?>assets/css/bootstrap.css" rel="stylesheet">
@@ -239,8 +239,8 @@
       <div class="alert alert-danger" role="alert" align="center" >
     <h4>CATATAN : "Semua berkas dimasukkan stopmap <u>WARNA HIJAU</u> untuk <u>Perempuan</u> dan <u>WARNA MERAH</u> untuk <u>Laki-laki</u></br> dan diberi <u>Identitas</u> Dan Silahkan Cetak diatas dengan tekan tombol <u>"Cetak Formulir"</u> dibawah</h4>
   </div>
-  <?=anchor('sekolah/cetak_form','Cetak Formulir',['class'=>'btn btn-warning btn-lg','role'=>'button', 'onclick'=>'return(validate());'])?>
-  <?=anchor('sekolah/index','Beranda',['class'=>'btn btn-success btn-lg'])?>
+  <?=anchor('sekolah/cetak_form','Cetak Formulir',['class'=>'btn btn-warning btn-lg','role'=>'button', 'onclick'=>'return(validate();)'])?>
+  <?=anchor('sekolah/index','Selesai',['class'=>'btn btn-success btn-lg'])?>
 
       </div>
     </center>
@@ -261,9 +261,9 @@
 <script type="text/javascript">
  function validate()
 {
-     var r=confirm("Untuk Print klik Ok??")
-     var i=window.location.href("http://127.0.0.1/ci4/sekolah/preview")
-    if (r==true && i==true)
+     var r=confirm("Untuk Print klik Ok?? Dan jika sudah selesai silahkan klik tombol SELESAI ")
+     
+    if (r==true)
 
       return true;
       

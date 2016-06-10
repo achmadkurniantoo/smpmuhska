@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <link rel="icon" href="<?php echo base_url() ;?>assets/img/icon1.png" type="image/gif" >
     <title>Pendaftaran</title>
 
     <link href="<?php echo base_url()?>assets/css/bootstrap.css" rel="stylesheet">
@@ -29,6 +29,11 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+    .containerGray{
+      background-color: #AFC6C6;
+    }
+    </style>
 
 </head>
 
@@ -58,37 +63,60 @@ include ("navbar.php");
     </header>
 
 <!-- Isi Konten -->
+<div class="containerGray">
+<div class="row">
 
-<div class="container-news-main-gray">
-
-<div class="col-md-3">
-    <img src="<?php echo base_url()?>assets/img/pendaftaran.png" width="300" height="350" >
+<div class="container">
+  <div class="col-sm-8">
 </div>
-
+<div class="col-sm-4">
   <h1> Syarat Pendaftaran </h1>
   <?php foreach($daftar->result() as $kdaftar){ ?>
     <h5><big><?php echo $kdaftar->daftar?></big></h5>
-<?php } ?>
+  <?php } ?>
+</div>
+</div>
+</div>
 </div>
 
-<div class="container-news-main-white">
+
+<div class="row">
+<div class="container">
+  <div class="col-sm-2">
+  </div>
+  <div class="col-sm-6">
   <h1> Program Pendidikan </h1>
   <?php foreach($program->result() as $kprogram){ ?>
     <h5><big><?php echo $kprogram->program?></big></h5>
 <?php } ?>
+<div class="col-sm-4">
+</div>
+</div>
+</div>
 </div>
 
-<div class="container-news-main-gray">
-<div class="col-md-3">
-    <img src="<?php echo base_url()?>assets/img/pendaftaran.png" width="300" height="350" >
+<div class="containerGray">
+<div class="row">
+
+<div class="container">
+<div class="col-sm-8">
 </div>
+<div class="col-sm-4">
   <h1> Target Kompetensi </h1>
   <?php foreach($target->result() as $ktarget){ ?>
     <h5><big><?php echo $ktarget->target?></big></h5>
 <?php } ?>
 </div>
+</div>
+</div>
+</div>
 
-<div class="container-news-main-white">
+
+<div class="row">
+<div class="container">
+  <div class="col-sm-2">
+  </div>
+<div class="col-sm-10">
   <h1> MENERIMA PESERTA DIDIK BARU TAHUN PELAJARAN <?=$tahun_pelajaran;?> </h1>
   <h3>Silahkan untuk Mendaftar Klik <u>Isi Formulir dibawah</u></h3>
   <?=anchor('sekolah/ppdb','Isi Formulir',['class'=>'btn btn-success'])?></br></br>
@@ -96,6 +124,9 @@ include ("navbar.php");
     <h4>CATATAN : "Semua berkas dimasukkan stopmap <u>WARNA HIJAU</u> untuk <u>Perempuan</u> dan <u>WARNA MERAH</u> untuk <u>Laki-laki</u></br> dan diberi <u>Identitas</u>"</h4>
   </div>
 </div>
+</div>
+</div>
+
 
 
 

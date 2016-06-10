@@ -1,1 +1,2 @@
-Simple Website untuk sekolahan dengan CodeIgniter
+It's A Simple Website of School with Codeigniter.
+

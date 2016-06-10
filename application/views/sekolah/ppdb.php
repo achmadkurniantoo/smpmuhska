@@ -8,8 +8,8 @@
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>SMP Muhammadiyah 10</title>
+    <link rel="icon" href="<?php echo base_url() ;?>assets/img/icon1.png" type="image/gif" >
+    <title>Form Pendaftaran</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url()?>assets/css/bootstrap.css" rel="stylesheet">
@@ -386,7 +386,7 @@
   <button type="submit" class="btn btn-primary btn-lg" onclick="return(validate());">Kirim</button>
   </form>
   <button type="reset" class="btn btn-default btn-lg">Reset</button>
-  <?=anchor('sekolah/pendaftaran','Kembali',['class'=>'btn btn-warning btn-lg'])?>
+  <?=anchor('sekolah/index','Kembali',['class'=>'btn btn-warning btn-lg'])?>
 </center>
 
 

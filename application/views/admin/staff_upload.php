@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <link rel="icon" href="<?php echo base_url() ;?>assets/img/icon1.png" type="image/gif" >
     <title>Admin SMP MUH 10 SKA</title>
 
     <!-- Bootstrap Core CSS -->
@@ -76,12 +76,62 @@
 
         <div class="form-group">
           <label for="nama">Nama</label>
-          <input type="text" class="form-control" name="nama" value="">
+          <input type="text" class="form-control" name="nama" placeholder="Nama">
         </div>
 
         <div class="form-group">
           <label for="jabatan">Jabatan</label>
-          <input type="text" class="form-control" name="jabatan" value="">
+          <input type="text" class="form-control" name="jabatan" placeholder="Jabatan">
+        </div>
+
+        <div class="form-group">
+          <label for="nuptk">NUPTK</label>
+          <input type="text" class="form-control" name="nuptk" placeholder="NUPTK">
+        </div>
+
+        <div class="form-group">
+          <label for="nip">NIP</label>
+          <input type="text" class="form-control" name="nip" placeholder="NIP">
+        </div>
+
+        <div class="form-group">
+          <label for="tempatLahir">Tempat Lahir</label>
+          <input type="text" class="form-control" name="tempatLahir" placeholder="Tempat Lahir">
+        </div>
+
+        <div class="form-group">
+          <label for="tanggalLahir">Tanggal Lahir</label>
+          <input type="text" class="form-control" name="tanggalLahir" placeholder="Tanggal Lahir tgl/bln/th">
+        </div>
+
+        <div class="form-group">
+          <label for="golongan">Golongan</label>
+          <input type="text" class="form-control" name="Gol" placeholder="Golongan">
+        </div>
+
+        <div class="form-group">
+          <label for="status">Status</label>
+          <input type="text" class="form-control" name="Status" placeholder="Status">
+        </div>
+
+        <div class="form-group">
+          <label for="Ijazah">Ijazah Terakhir dan Tahun</label>
+          <input type="text" class="form-control" name="ijazahTerakhirTahun" placeholder="Ijazah Terakhir dan Tahun (ex: S-1.2009)">
+        </div>
+
+        <div class="form-group">
+          <label for="bekerja">Mulai Bekerja</label>
+          <input type="text" class="form-control" name="mulaiBekerja" placeholder="Mulai bekerja">
+        </div>
+
+        <div class="form-group">
+          <label for="nomerTelepon">Nomer Telepon</label>
+          <input type="text" class="form-control" name="nomerTelepon" placeholder="Nomer Telepon">
+        </div>
+
+        <div class="form-group">
+          <label for="keterangan">Keterangan</label>
+          <input type="text" class="form-control" name="Keterangan" placeholder="Keterangan">
         </div>
 
         <button type="submit" class="btn btn-primary">Upload</button>
@@ -90,7 +140,7 @@
       </form>
    </div>
 
-   <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+   
 </div>
 
         <!-- /#page-wrapper -->

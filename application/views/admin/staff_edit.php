@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <link rel="icon" href="<?php echo base_url() ;?>assets/img/icon1.png" type="image/gif" >
     <title>Admin SMP MUH 10 SKA</title>
 
     <!-- Bootstrap Core CSS -->
@@ -65,9 +65,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 if($this->input->post()){
    $nama       = set_value('nama');
    $jabatan    = set_value('jabatan');
+   $NIP        = set_value('nip');
+   $status    = set_value('Status');
+    $NUPTK     = set_value('nuptk');
+  $tempat_lahir = set_value('tempatLahir');
+  $tanggal_lahir       = set_value('tanggalLahir');
+  $gol        = set_value('Gol');
+  $ijazah_terakhir_tahun       = set_value('ijazahTerakhirTahun');
+  $mulai_bekerja        = set_value('mulaiBekerja');
+  $nomer_telepon        = set_value('nomerTelepon');
+  $keterangan        = set_value('Keterangan');
 } else {
    $nama       = $image->nama;
    $jabatan    = $image->jabatan;
+   $NIP        = $image->NIP;
+   $status     = $image->status;
+   $NUPTK      = $image->NUPTK;
+   $tempat_lahir = $image->tempat_lahir;
+   $tanggal_lahir = $image->tanggal_lahir;
+   $gol = $image->gol;
+   $ijazah_terakhir_tahun = $image->ijazah_terakhir_tahun;
+   $mulai_bekerja = $image->mulai_bekerja;
+   $nomer_telepon = $image->nomer_telepon;
+   $keterangan = $image->keterangan;
 }?>
     <div id="container">
    
@@ -96,13 +116,55 @@ if($this->input->post()){
           <input type="text" class="form-control" name="jabatan" value="<?=$jabatan?>">
         </div>
 
-        <!--<div class="form-group">
-        <label>Tampilkan / sembunyikan gambar</label>
-        <div>
-          <div class="radio-inline"> <input type="radio" name="radioOption" id="show" value="show" checked> Tampilkan</div>
-          <div class="radio-inline"> <input type="radio" name="radioOption" id="hidden" value="hidden"> Sembunyikan </div>
+        <div class="form-group">
+          <label for="nuptk">NUPTK</label>
+          <input type="text" class="form-control" name="nuptk" value="<?=$NUPTK?>">
         </div>
-        </div> -->
+
+        <div class="form-group">
+          <label for="nip">NIP</label>
+          <input type="text" class="form-control" name="nip" value="<?=$NIP?>">
+        </div>
+
+        <div class="form-group">
+          <label for="tempatLahir">Tempat Lahir</label>
+          <input type="text" class="form-control" name="tempatLahir" value="<?=$tempat_lahir?>">
+        </div>
+
+        <div class="form-group">
+          <label for="tanggalLahir">Tanggal Lahir</label>
+          <input type="text" class="form-control" name="tanggalLahir" value="<?=$tanggal_lahir?>">
+        </div>
+
+        <div class="form-group">
+          <label for="golongan">Golongan</label>
+          <input type="text" class="form-control" name="Gol" value="<?=$gol?>">
+        </div>
+
+        <div class="form-group">
+          <label for="status">Status</label>
+          <input type="text" class="form-control" name="Status" value="<?=$status?>">
+        </div>
+
+        <div class="form-group">
+          <label for="Ijazah">Ijazah Terakhir dan Tahun</label>
+          <input type="text" class="form-control" name="ijazahTerakhirTahun" value="<?=$ijazah_terakhir_tahun?>">
+        </div>
+
+        <div class="form-group">
+          <label for="bekerja">Mulai Bekerja</label>
+          <input type="text" class="form-control" name="mulaiBekerja" value="<?=$mulai_bekerja?>">
+        </div>
+
+        <div class="form-group">
+          <label for="nomerTelepon">Nomer Telepon</label>
+          <input type="text" class="form-control" name="nomerTelepon" value="<?=$nomer_telepon?>">
+        </div>
+
+        <div class="form-group">
+          <label for="keterangan">Keterangan</label>
+          <input type="text" class="form-control" name="Keterangan" value="<?=$keterangan?>">
+        </div>
 
         <button type="submit" class="btn btn-primary">Save</button>
         <?=anchor('admin/dashboard/staff','Cancel',['class'=>'btn btn-warning'])?>

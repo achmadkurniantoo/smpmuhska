@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <link rel="icon" href="<?php echo base_url() ;?>assets/img/icon1.png" type="image/gif"  >
     <title>Admin SMP MUH 10 SKA</title>
 
     <!-- Bootstrap Core CSS -->
@@ -58,10 +58,10 @@
                             <center> 
                                     <h2><?=$hasil['title'] ?></h2>
                                     <div class="img-responsive" align="center">
-                <img src="<?=$hasil['logo'] ?>" class="img-thumbnail" alt="logo" width="304" height="236">
+                
                                     </div>
                                     <small><h2><?=$hasil['city']?></h2></small>
-                                    <i><small><h3> " <?=$hasil['tagline']?> " </h3></small></i>
+                                    
                                     <i><small><h4> " <?=$hasil['tahun_pelajaran']?> " </h4></small></i>
 
 
@@ -100,16 +100,6 @@
                               <label for="city">KOTA</label>
                               <input type="text" class="form-control" name="city" value="<?=$hasil['city']?>">
                         </div>
-
-                        <div class="form-group">
-                              <label for="logo">LOGO</label>
-                              <input type="text" class="form-control" name="logo" value="<?=$hasil['logo']?>">
-                        </div>        
-
-                        <div class="form-group">
-                              <label for="tagline">Tag Line</label>
-                              <input type="text" class="form-control" name="tagline" value="<?=$hasil['tagline']?>">
-                        </div> 
 
                         <div class="form-group">
                               <label for="tahun_pelajaran">Tahun Pelajaran</label>

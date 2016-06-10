@@ -11,7 +11,7 @@ class Gallery_model extends CI_Model
 	}
 
 	function getAll(){
-		$result = $this->db->get('images');
+		$result=$this->db->query('SELECT * FROM images ORDER BY date DESC');
 		return $result;
 	}
 

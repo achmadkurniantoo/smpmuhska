@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <link rel="icon" href="<?php echo base_url() ;?>assets/img/icon1.png" type="image/gif" >
     <title>Berita Sekolah</title>
 
     <link href="<?php echo base_url()?>assets/css/bootstrap.css" rel="stylesheet">
@@ -41,13 +41,13 @@
             margin-right: 100px;
             height: auto;
             border-bottom: 1px dashed #DDD;
-            
+
 
         }
 
         .tere .pad {
             overflow: hidden;
-            
+
         }
 
         .tere .teredt {
@@ -57,7 +57,7 @@
             line-height: normal;
             color: #999;
             text-transform: uppercase;
-            
+
 }
 
         .tere .exp {
@@ -105,13 +105,21 @@
         }
 
         #boxid {
-            
+
             overflow: hidden;
             padding-top: 5px;
             padding-right: 295px;
             padding-left: 295px;
             padding-bottom: 35px;
 
+        }
+
+        .containerAbu{
+          background-color: #AFC6C6;
+        }
+
+        h6{
+          font-size: 16px;
         }
     </style>
 
@@ -133,7 +141,7 @@ include ("navbar.php");
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="page-heading">
-                        <big><?=$thiskategori?></big>
+                        <big><?=urldecode($thiskategori)?></big>
                         <hr class="small">
                         <span class="subheading">Segala perkembangan berita mengenai <?=$title. " ".$city ?></span>
                     </div>
@@ -144,60 +152,79 @@ include ("navbar.php");
 
 
     <!-- Post Content -->
-<?php if (strtoupper($thiskategori) == 'TAUSIAH') { 
+
+<?php if (strtoupper($thiskategori) == 'TAUSIAH') {
     $num = 1;
-    foreach ($results as $key) { 
+    foreach ($results as $key) {
         if ($num % 2) { ?>
-
-            <div class="container-news-main-gray">
-                <p><?php $hsl = (String) $key->isi;  echo html_entity_decode($hsl);?> </p> 
+          <div class="containerAbu">
+            <div class="row">
+                <div class="container">
+                    <div class="col-sm-2"> </div>
+                    <div class="col-sm-10">
+                            <h6><?php $hsl = (String) $key->isi;  echo html_entity_decode($hsl);?> </h6>
+                    </div>
+                </div>
             </div>
+          </div>
+
         <?php }else{ ?>
-            <div class="container-news-main-white">
-                <p><?php $hsl = (String) $key->isi;  echo html_entity_decode($hsl);?> </p> 
+
+            <div class="row">
+                <div class="container">
+                  <div class="col-sm-2"></div>
+                    <div class="col-sm-10">
+                        <h6><?php $hsl = (String) $key->isi;  echo html_entity_decode($hsl);?> </h6>
+                    </div>
+
+                </div>
             </div>
+        <?php } $num++; } } else{ ?>
 
-<?php } $num++; } } else{ ?>
+<div class="container">
 
-    <div id="boxid " >
-    <?php foreach ($results as $key) { ?>
-            <div class="tere">
-                <div class="pad">
-                    <?php 
+
+        <!-- Project Three -->
+        <hr>
+         <?php foreach ($results as $key) { ?>
+
+        <div class="row">
+            <div class="col-md-7">
+                    <?php
                         $str = html_entity_decode($key->isi);
                         preg_match('/(<img[^>]+>)/i', $str, $matches);
                     ?>
-                    
-                        <a href="<?php echo base_url().'sekolah/baca/'.$key->kategori. "/".$key->id_akademik ?>">
-                            <?php if ($matches != NULL) { ?>
-                                <div class="limiter thumbnails">
-                                <?php echo $matches[0];?>
-                                
-                            <?php }?>
-                        </div>
-                        <h2> <?=$key->judul?> </h2>
-                    </a>
-                    <div class="teredt"> 
-                        POSTED ON <?=$key->tgl_posting?>  / <a href="<?php echo base_url().'sekolah/artikel/'. $key->kategori; ?>" rel="category tag"> <?=$key->kategori?></a>
-                    </div>
-                    <?php $aa = strip_tags(html_entity_decode($key->isi));?>
-                    <div class="exp"><?=substr($aa, 0,400)?>...</div>
-                     <div align="right"><?=anchor('sekolah/baca/'.$key->kategori. "/".$key->id_akademik ,'Baca Selengkapnya..',['class'=>'btn btn-success'])?></div>
-                </div>
+                <a href="<?php echo base_url().'sekolah/baca/'.$key->kategori. "/".$key->id_akademik ?>">
+                    <?php if ($matches != NULL) { ?>
+                         <img class="img-responsive" <?php echo $matches[0];?>
+                     <?php }?>
+                </a>
             </div>
-    <?php } }?>
-    </div>
+            <div class="col-md-5">
+                <h3><?=$key->judul?></h3>
+                <h4>POSTED ON <?=$key->tgl_posting?>  / <a href="<?php echo base_url().'sekolah/artikel/'. $key->kategori; ?>" rel="category tag"> <?=$key->kategori?></a></h4>
+                <?php $aa = strip_tags(html_entity_decode($key->isi));?>
+                <div class="exp"><?=substr($aa, 0,400)?>...</div>
+                 <div align="right"><?=anchor('sekolah/baca/'.$key->kategori. "/".$key->id_akademik ,'Baca Selengkapnya..',['class'=>'btn btn-success'])?></div>
+            </div>
+        </div>
+         <hr>
+        <?php } }?>
+        <!-- /.row -->
 
     <!-- ccc -->
-    <div class="alert alert-warning" align="center">
-        <!-- Show pagination links -->
-        <ul class="pagination">
-        <?php foreach ($links as $link) {
-        echo "<li >". $link."</li>";
-        } ?>
-        </ul>
-    </div>
-   
+     <!-- Pagination -->
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <ul class="pagination">
+                    <?php foreach ($links as $link) {
+                        echo "<li >". $link."</li>";
+                    } ?>
+                </ul>
+            </div>
+        </div>
+        <!-- /.row -->
+</div>
     <!-- Post Content -->
     <hr>
 

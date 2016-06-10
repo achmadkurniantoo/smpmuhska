@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>Berita Sekolah</title>
-
+    <link rel="icon" href="<?php echo base_url() ;?>assets/img/icon1.png" type="image/gif" >
     <link href="<?php echo base_url()?>assets/css/bootstrap.css" rel="stylesheet">
     <link href="<?php echo base_url()?>assets/css/bootstrap.min.css" rel="stylesheet">
 
@@ -92,7 +92,7 @@ include ("navbar.php");
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="page-heading">
-                        <big><?=$thiskategori?></big>
+                        <big><?=urldecode($thiskategori)?></big>
                         <hr class="small">
                         <span class="subheading">Segala perkembangan berita mengenai <?=$title. " ".$city ?></span>
                     </div>
@@ -102,36 +102,43 @@ include ("navbar.php");
     </header>
 
 
-    <!-- Post Content -->
-    <article>
-        <div class="container-news-main">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
 
-                
-                <?php foreach ($artikel->result() as $key ) { ?>
-                    
-                    <div class="headpost">
-                        <h1> <?=$key->judul?> </h1>
-                        <div class="bottomtitle">
-                            POSTED ON <?=$key->tgl_posting?> KATEGORI <a href="<?php echo base_url().'sekolah/artikel/'. $key->kategori; ?>" rel="category tag"> <?=$key->kategori?></a>
-                        </div>
+<div class="container">
+
+    <div class="row">
+            <div class="col-lg-2"></div>
+
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+                 <?php foreach ($artikel->result() as $key ) { ?>
+                <!-- Title -->
+                <h1><?=$key->judul?></h1>
+
+                <!-- Date/Time -->
+                 <div class="headpost">
+                    <div class="bottomtitle">
+                    <p><span class="glyphicon glyphicon-time"></span> _POSTED ON <?=$key->tgl_posting?> KATEGORI <a href="<?php echo base_url().'sekolah/artikel/'. $key->kategori; ?>" rel="category tag"> <?=$key->kategori?></a></p>
                     </div>
-                    
-                   <div class="artikels">
-                    <?php $hsl = (String) $key->isi;  echo html_entity_decode($hsl);?> 
-                   </div>
-                    
-                <?php } ?>
-
                 </div>
+               
+                <!-- Post Content -->
+                <div class="artikels">
+                    <?php $hsl = (String) $key->isi;  echo html_entity_decode($hsl);?> 
+                </div>
+
+                <hr>
+
+            <?php } ?>
             </div>
-        </div>
-    </article>
+
+            <div class="col-lg-2"></div>
+    </div>
+</div>
 
 
-
-    <hr>
 
     <!-- Footer -->
     <?php

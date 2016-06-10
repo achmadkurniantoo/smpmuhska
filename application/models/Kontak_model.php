@@ -12,7 +12,7 @@ class Kontak_model extends CI_Model
 	}
 
 	function getAll(){
-		$result = $this->db->get('kontak');
+		$result = $this->db->order_by('id','desc')->get('kontak');
 		return $result;
 	}
 	function getBelumBaca(){
@@ -47,8 +47,8 @@ class Kontak_model extends CI_Model
 	}
 
 	function getIfShow(){
-		$result = $this->db->where('status_tayang', 'show')->get('kontak');
-		return $result;
+		$result = $this->db->order_by('id','desc')->where('status_tayang', 'show')->get('kontak');
+		return $result->result();
 	}
 
 	function kirimPesan($data){

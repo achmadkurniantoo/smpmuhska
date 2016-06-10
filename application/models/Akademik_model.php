@@ -22,12 +22,12 @@ class Akademik_model extends CI_Model
 
 
 	function getAllAkademik(){
-		$result = $this->db->order_by('tgl_posting','DESC')->get('akademik');
+		$result = $this->db->get('akademik');
 		return $result;
 	}
 
 	function getAkademikById($id){
-		$result = $this->db->order_by('tgl_posting','DESC')->where('id_akademik', $id)->get('akademik');
+		$result = $this->db->where('id_akademik', $id)->get('akademik');
 		return $result;
 	}
 
@@ -37,7 +37,7 @@ class Akademik_model extends CI_Model
 	}
 
 	function getAkademikIfShowByKategori($kategori){
-		$result = $this->db->order_by('tgl_posting','DESC')->where(['status' => 'show', 'kategori' => $kategori])->get('akademik');
+		$result = $this->db->where(['status' => 'show', 'kategori' => $kategori])->get('akademik');
 		return $result;
 	}
 
@@ -63,6 +63,16 @@ class Akademik_model extends CI_Model
 	function deleteAkademik($id){
 		try {
 			$this->db->where('id_akademik', $id)->limit(1)->delete('akademik');
+			return true;
+		} catch (Exception $e) {
+			echo $e->getMessage();
+		}
+	}
+
+
+	function deleteAllArtikelByKategori($kategori){
+		try {
+			$this->db->where('kategori', $kategori)->delete('akademik');
 			return true;
 		} catch (Exception $e) {
 			echo $e->getMessage();

@@ -27,6 +27,7 @@ class Sekolah extends CI_Controller
 		$this->load->model('visi_misi_model');
 		$this->load->model('staff_model');
 		$this->load->model('akademik_model');
+        $this->load->model('akademik_model_new');
 		$this->load->model('kriteria_daftar_model');
 		$this->load->model('kriteria_program_model');
 		$this->load->model('kriteria_target_model');
@@ -48,8 +49,13 @@ class Sekolah extends CI_Controller
 		$this->data['tahun_pelajaran'] = $result['tahun_pelajaran'];
 
 //--------------berita-------------------
+        
 
 		$this->data['kategoris'] = $this->akademik_model->getAllKategoriAkademik();
+
+//--------------akademik-------------------
+
+        $this->data['kategoriakademik'] = $this->akademik_model_new->getAllKategoriAkademik();
 
 
 //----------------tentang----------------------------
@@ -76,6 +82,8 @@ class Sekolah extends CI_Controller
 
 //---------------------Sejarah------------------------------------------------
 		$this->data['konten'] = $this->sejarah_model->getAll();
+//-----------------------------------testimoni-------------------------------
+        $this->data['testimoni'] = $this->kontak_model->getIfShow();
 	}
 
 
@@ -130,7 +138,7 @@ class Sekolah extends CI_Controller
 	        $datakontak['pesan']   = set_value('pesan');
 	        $datakontak['tgl_kirim']   = unix_to_human($now, TRUE, 'us');
 	        $datakontak['status_baca']   = 'belum';
-	        $datakontak['status_tayang']   = 'hiden';
+	        $datakontak['status_tayang']   = 'hidden';
 
 	        $this->kontak_model->kirimPesan($datakontak);
 	        $this->session->set_flashdata('message','Pesan Telah terkirim....');
@@ -145,34 +153,74 @@ class Sekolah extends CI_Controller
 
 		$config["base_url"] = base_url() . "sekolah/artikel/".$kategori;
 		$total_row = $this->akademik_model->record_count($kategori);
-		$config["total_rows"] = $total_row;
+		$config["total_rows"] = $total_row * 3 + $total_row / 2;
 		$config["per_page"] = 5;
 		$config['use_page_numbers'] = TRUE;
 		$config['next_link'] = 'Next';
 		$config['prev_link'] = 'Previous';
+       
 
 		$this->pagination->initialize($config);
+        $this->db->order_by("id_akademik","desc");
 
-		$dari = $this->uri->segment('3');
+		$dari = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
 
-		$data["results"] = $this->akademik_model->fetch_data($config["per_page"],$dari, $kategori);
+		$data["results"] = $this->akademik_model->fetch_data($config["per_page"],$dari, urldecode($kategori));
 
 		$str_links = $this->pagination->create_links();
 		$data["links"] = explode('&nbsp;',$str_links );
 		$data["thiskategori"] = $kategori;
 
-		$this->load->view('sekolah/listberita',['title' => $this->data['title'], 'city' => $this->data['city'],'thiskategori'=>$data["thiskategori"],'results' => $data["results"],'links' =>$data["links"], 'title' => $this->data['title'],'kategoris'=> $this->data["kategoris"]]);
+		$this->load->view('sekolah/listberita',['title' => $this->data['title'], 'city' => $this->data['city'],'thiskategori'=>$data["thiskategori"],'results' => $data["results"],'links' =>$data["links"], 'title' => $this->data['title'], 'kategoriakademik'=> $this->data["kategoriakademik"],'kategoris'=> $this->data["kategoris"]]);
 		
 	}
 
 	function baca($kategori=NULL,$id=NULL){
 		
 		if($kategori != NULL && $id != NULL){
-			$data["artikel"] = $this->akademik_model->getAkademikByIdIfShow($id, $kategori);
+			$data["artikel"] = $this->akademik_model->getAkademikByIdIfShow($id, urldecode($kategori));
 			$data["thiskategori"] = $kategori;
-			$this->load->view('sekolah/berita',['title' => $this->data['title'], 'city' => $this->data['city'],'thiskategori'=>$data["thiskategori"], 'kategoris'=> $this->data["kategoris"],'artikel' =>$data["artikel"], 'title' => $this->data['title']]);
+			$this->load->view('sekolah/berita',['title' => $this->data['title'], 'city' => $this->data['city'],'thiskategori'=>$data["thiskategori"], 'kategoriakademik'=> $this->data["kategoriakademik"], 'kategoris'=> $this->data["kategoris"],'artikel' =>$data["artikel"], 'title' => $this->data['title']]);
 		}	
 	}
+
+    //-----------------------------------Akademik------------------------------------------------
+    //-----------------------------------------------------------------------------------------
+
+    function akademik($kategori){
+
+        $config["base_url"] = base_url() . "sekolah/akademik/".$kategori;
+        $total_row = $this->akademik_model_new->record_count($kategori);
+        $config["total_rows"] = $total_row * 3 + $total_row / 2;
+        $config["per_page"] = 5;
+        $config['use_page_numbers'] = TRUE;
+        $config['next_link'] = 'Next';
+        $config['prev_link'] = 'Previous';
+       
+
+        $this->pagination->initialize($config);
+        $this->db->order_by("id_akademik","desc");
+
+        $dari = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+        $data["results"] = $this->akademik_model_new->fetch_data($config["per_page"],$dari, urldecode($kategori));
+
+        $str_links = $this->pagination->create_links();
+        $data["links"] = explode('&nbsp;',$str_links );
+        $data["thiskategori"] = $kategori;
+
+        $this->load->view('sekolah/new_listberita',['title' => $this->data['title'], 'city' => $this->data['city'],'thiskategori'=>$data["thiskategori"],'results' => $data["results"],'links' =>$data["links"], 'title' => $this->data['title'], 'kategoris'=> $this->data["kategoris"],'kategoriakademik'=> $this->data["kategoriakademik"]]);
+        
+    }
+
+    function baca_akademik($kategori=NULL,$id=NULL){
+        
+        if($kategori != NULL && $id != NULL){
+            $data["akademik"] = $this->akademik_model_new->getAkademikByIdIfShow($id, urldecode($kategori));
+            $data["thiskategori"] = $kategori;
+            $this->load->view('sekolah/new_berita',['title' => $this->data['title'], 'city' => $this->data['city'],'thiskategori'=>$data["thiskategori"], 'kategoriakademik'=> $this->data["kategoriakademik"], 'kategoris'=> $this->data["kategoris"],'akademik' =>$data["akademik"], 'title' => $this->data['title']]);
+        }   
+    }
 
 	//-----------------------------------STAFF-------------------------------------------------
 	//-----------------------------------------------------------------------------------------
@@ -239,7 +287,13 @@ class Sekolah extends CI_Controller
      	
      	
 
-	}
+	}  
+    //------------------------------testimoni---------------------------------------------
+    //------------------------------------------------------------------------------------
+    function testimoni(){
+        $this->load->view('sekolah/testimoni', $this->data);
+    }
+
 	
 	//------------------------------FORM PPDB---------------------------------------------
 	//-------------------------------------------------------------------------------------
@@ -416,6 +470,12 @@ class Sekolah extends CI_Controller
 
         }
     }
+
+    function view($id)
+     {
+        $views = $this->gallery_model->getById($id)->row();
+        $this->load->view('sekolah/view', ['views'=>$views]);
+     }
     
     
 	

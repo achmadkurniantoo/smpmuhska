@@ -25,7 +25,7 @@
                         </li>
                     </ul>
                     <hr class="small">
-                    <p class="text-muted">Copyright &copy; Vandalicious 2016</p>
+                    <p class="text-muted">Copyright &copy; smpmuh10solo 2016</p>
                 </div>
             </div>
         </div>

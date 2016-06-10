@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin</a>
+                <a class="navbar-brand" href="<?php echo base_url() ?>admin/dashboard/index">Admin SMP MUHAMMADIYAH 10 SURAKARTA</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -18,7 +18,7 @@
                     <ul class="dropdown-menu">
                     
                         <li>
-                            <a href="<?php echo base_url() ?>index.php/admin/dashboard/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="<?php echo base_url() ?>admin/dashboard/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -27,43 +27,46 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="<?php echo base_url() ?>index.php/admin/dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="<?php echo base_url() ?>admin/dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url() ?>index.php/admin/dashboard/akademik"><i class="fa fa-fw fa-file"></i> Berita / Artikel</a>
+                        <a href="<?php echo base_url() ?>admin/dashboard/akademik"><i class="fa fa-fw fa-file"></i> Berita / Artikel</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url() ?>index.php/admin/dashboard/staff"><i class="fa fa-fw fa-file"></i> Staff / Guru</a>
+                        <a href="<?php echo base_url() ?>admin/dashboard/new_akademik"><i class="fa fa-fw fa-file"></i> Akademik </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo base_url() ?>admin/dashboard/staff"><i class="fa fa-fw fa-file"></i> Staff / Guru</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#daftar"><i class="fa fa-fw fa-wrench"></i> Pendaftaran<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="daftar" class="collapse">
     
                             <li>
-                                <a href="<?php echo base_url() ?>index.php/admin/dashboard/daftar">Edit Syarat Pendaftaran</a>
+                                <a href="<?php echo base_url() ?>admin/dashboard/daftar">Edit Syarat Pendaftaran</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url() ?>index.php/admin/dashboard/program">Edit Program Pendidikan</a>
+                                <a href="<?php echo base_url() ?>admin/dashboard/program">Edit Program Pendidikan</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url() ?>index.php/admin/dashboard/target">Edit Target Kompetensi</a>
+                                <a href="<?php echo base_url() ?>admin/dashboard/target">Edit Target Kompetensi</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url() ?>index.php/admin/dashboard/pendaftaran">Cek Pendaftar</a>
+                                <a href="<?php echo base_url() ?>admin/dashboard/pendaftaran">Cek Pendaftar</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="<?php echo base_url() ?>index.php/admin/dashboard/gallery"><i class="fa fa-fw fa-table"></i> Gallery</a>
+                        <a href="<?php echo base_url() ?>admin/dashboard/gallery"><i class="fa fa-fw fa-table"></i> Gallery</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#tentang"><i class="fa fa-fw fa-wrench"></i> Tentang <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="tentang" class="collapse">
                             <li>
-                                <a href="<?php echo base_url() ?>index.php/admin/dashboard/tentang">Edit Visi dan Misi</a>
+                                <a href="<?php echo base_url() ?>admin/dashboard/tentang">Edit Visi dan Misi</a>
                             </li>
                             <li>
-                                <a href="<?php echo base_url() ?>index.php/admin/dashboard/sejarah">Edit Sejarah</a>
+                                <a href="<?php echo base_url() ?>admin/dashboard/sejarah">Edit Sejarah</a>
                             </li>
                         </ul>
                     </li>
@@ -71,7 +74,7 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#setting"><i class="fa fa-fw fa-wrench"></i> Setting <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="setting" class="collapse">
                             <li>
-                                <a href="<?php echo base_url() ?>index.php/admin/dashboard/judul">Edit Nama Sekolah</a>
+                                <a href="<?php echo base_url() ?>admin/dashboard/judul">Edit Nama Sekolah</a>
                             </li>
                             
                         </ul>

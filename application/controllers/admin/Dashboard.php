@@ -19,6 +19,7 @@ class Dashboard extends CI_Controller
 		$this->load->model('kontak_model');
 		$this->load->model('postingan_model');
 		$this->load->model('akademik_model');
+        $this->load->model('akademik_model_new');
 		$this->load->model('staff_model');      
 		$this->load->model('visi_misi_model'); 
 		$this->load->model('kriteria_program_model');
@@ -49,8 +50,14 @@ class Dashboard extends CI_Controller
    		$this->data['daftarkategori'] = $this->postingan_model->getAllKategori();
    		$this->data['semuaberita'] = $this->postingan_model->getAllArtikel();
    		$this->data['allpostingan'] = $this->postingan_model->getAllPostingan();
+
    		$this->data['allkategoriakademik'] = $this->akademik_model->getAllKategoriAkademik();
    		$this->data['allakademik'] = $this->akademik_model->getAllAkademik();
+
+        $this->data['newallkategoriakademik'] = $this->akademik_model_new->getAllKategoriAkademik();
+        $this->data['newallakademik'] = $this->akademik_model_new->getAllAkademik();
+
+
    		$this->data['visimisi'] = $this->visi_misi_model->getVisiMisi();           
    		$this->data['staff'] = $this->staff_model->getAllGuru();                   
    		$this->data['program'] = $this->kriteria_program_model->getAll();
@@ -594,6 +601,147 @@ class Dashboard extends CI_Controller
 	       	redirect('admin/dashboard/berita_baru');
         }
 	}
+//-------------------------------------NEW AKADEMIX----------------------------------------
+//-------------------------------------------------------------------------------------
+    function new_akademik(){
+        $this->form_validation->set_rules('namakategori','Namakategori','required');
+
+
+        if ($this->form_validation->run() == FALSE){
+            $this->load->view('admin/new_akademik',$this->data);
+        }else{
+            $newdatakategori['kategori']   = set_value('namakategori');
+                $this->akademik_model_new->setKategoriAkademik($newdatakategori);
+                $this->session->set_flashdata('message','Kategori baru telah dibuat.....');
+            redirect('admin/dashboard/new_akademik');
+        }
+
+    }
+
+    function new_akademik_baru(){
+
+        $rules = [
+            [
+                'field' => 'title',
+                'label' => 'Title',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'opsikategori',
+                'label' => 'Opsikategori',
+                'rules' => 'required'
+            ]
+        ];
+        $this->form_validation->set_rules($rules);
+
+        if ($this->form_validation->run() == FALSE){
+            $this->load->view('admin/new_akademik_baru',$this->data);
+        }
+        else{
+            $now = time();
+            $tgl = unix_to_human($now, TRUE, 'us');
+
+            $newdataakademik['judul']   = set_value('title');
+            
+            
+            $newdataakademik['isi']   = set_value('isi');
+            $newdataakademik['tgl_posting']   = $tgl;
+            $newdataakademik['kategori'] = set_value('opsikategori');
+            $newdataakademik['status']   = set_value('radioOption');
+
+            $this->akademik_model_new->setAkademik($newdataakademik);
+            
+            $this->session->set_flashdata('message','Berita telah dibuat.....');
+            redirect('admin/dashboard/new_akademik_baru');
+        }
+    }
+
+    function new_akademik_edit($id){
+        $hasil = $this->akademik_model_new->getKategoriAkademikById($id)->row();
+        $newakademikbyid = $this->akademik_model_new->getAkademikById($id)->row();
+
+
+
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        if ($this->form_validation->run() == FALSE){
+            $this->load->view('admin/new_akademik_edit', ['username' => $this->data['username'],'kategoribyid' => $hasil
+                ,'newallkategoriakademik' => $this->data['newallkategoriakademik'] ,'newakademikbyid' => $newakademikbyid
+                    ]);
+        }else{
+            $newdataakademik['judul']   = set_value('title');
+            $newdataakademik['isi']   = set_value('isi');
+            $newdataakademik['status']   = set_value('radioOption');
+
+            $this->akademik_model_new->updateAkademik($id,$newdataakademik);
+
+            $this->session->set_flashdata('message','Artikel telah diedit.....');
+            redirect('admin/dashboard/new_akademik');
+        }
+    }
+
+    function new_akademik_status($id){
+
+        $dat = $this->akademik_model_new->getAkademikById($id);
+        $row = $dat->row();
+
+        $stts;
+        
+        if ($row->status == 'hidden'){
+            $new['status'] = 'show';
+            $this->akademik_model_new->updateAkademik($id,$new);
+            $stts = 'ditayangkan';
+        }
+
+
+        if ($row->status == 'show'){
+            $new['status'] = 'hidden';
+            $this->akademik_model_new->updateAkademik($id,$new);
+            $stts = 'disembunyikan';
+        }
+
+        
+        
+        $this->session->set_flashdata('message','Pesan berhasil '.$stts.'....');
+        redirect('admin/dashboard/new_akademik','resresh');
+    }
+
+    function new_akademik_delete($id){
+        $this->akademik_model_new->deleteAkademik($id);
+        $this->session->set_flashdata('message','Berita telah dihapus.....');
+        redirect('admin/dashboard/new_akademik');
+    }
+
+    //-----------------------------------
+    function new_akademik_edit_kategori($id){
+        $this->form_validation->set_rules('namakategori','Namakategori','required');
+        $hasil = $this->akademik_model_new->getKategoriAkademikById($id)->row();
+
+        if ($this->form_validation->run() == FALSE){
+            $this->load->view('admin/new_akademik_edit_kategori',['username' => $this->data['username'],'newkategoribyid' => $hasil, 
+                'newallkategoriakademik' => $this->data['newallkategoriakademik'] ,'newallakademik' => $this->data['newallakademik']
+                ]);
+        }else{
+            $newdatakategori['kategori']   = set_value('namakategori');
+                $this->akademik_model_new->updateKategoriAkademik($id,$newdatakategori);
+                $this->session->set_flashdata('message','Kategori baru telah diedit.....');
+            redirect('admin/dashboard/new_akademik');
+        }
+    }
+
+    function new_akademik_delete_kategori($kategori,$id){
+
+        $this->akademik_model_new->deleteAllArtikelByKategori($kategori);
+
+
+        $this->akademik_model_new->deleteKategoriAkademik($id);
+        $this->session->set_flashdata('message','Kategori baru telah dihapus.....');
+        redirect('admin/dashboard/new_akademik');
+    }
+
+
+
+
+
 //-------------------------------------AKADEMIX----------------------------------------
 //-------------------------------------------------------------------------------------
 	function akademik(){
@@ -752,7 +900,45 @@ class Dashboard extends CI_Controller
                 'field' => 'jabatan',
                 'label' => 'Jabatan',
                 'rules' => 'required'
-       		]
+       		],
+            [
+                'field' => 'nomerTelepon',
+                'label' => '*No.Telp',
+                'rules' => 'required|integer'
+            ],
+            [
+                'field' => 'nuptk',
+                'label' => '*NUPTK',
+                'rules' => 'required'
+            ],
+            
+            [
+                'field' => 'tempatLahir',
+                'label' => '*Tempat Lahir',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'tanggalLahir',
+                'label' => '*Tanggal Lahir',
+                'rules' => 'required'
+            ],
+            
+            [
+                'field' => 'Status',
+                'label' => '*Status',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'ijazahTerakhirTahun',
+                'label' => '*Ijazah Terakhir Tahun',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'mulaiBekerja',
+                'label' => '*Mulai Bekerja',
+                'rules' => 'required'
+            ],
+            
         ];
 
         $this->form_validation->set_rules($rules);
@@ -780,18 +966,21 @@ class Dashboard extends CI_Controller
 	        else{
 	            $file = $this->upload->data();
 
-	            //$now = time();
-	            //$tgl = unix_to_human($now, TRUE, 'us');
-	            $str1 = str_replace(' ' , '',  $file['file_name'] .  set_value('nama'));
-	            $toidGuru = str_replace('.','',$str1 );
-	            //print_r($file);
+	            
 	            $data = [
-	                'id_guru'     => $toidGuru ,
 	                'foto'          => 'foto/' . $file['file_name'],
 	                'nama'         => set_value('nama'),
-	                //'date'          => $tgl,
+	                'NIP'          => set_value('nip'),
 	                'jabatan'   => set_value('jabatan'),
-	                //'status'        => set_value('radioOption')
+	                'status'        => set_value('Status'),
+                    'NUPTK'        => set_value('nuptk'),
+                    'tempat_lahir' => set_value('tempatLahir'),
+                    'tanggal_lahir'        => set_value('tanggalLahir'),
+                    'gol'        => set_value('Gol'),
+                    'ijazah_terakhir_tahun'        => set_value('ijazahTerakhirTahun'),
+                    'mulai_bekerja'        => set_value('mulaiBekerja'),
+                    'nomer_telepon'        => set_value('nomerTelepon'),
+                    'keterangan'        => set_value('Keterangan'),
 	            ];
 	            $this->staff_model->createGuru($data);
 	            $this->session->set_flashdata('message','Staff/Guru berhasil diupload..');
@@ -812,7 +1001,46 @@ class Dashboard extends CI_Controller
                 'field' => 'jabatan',
                 'label' => 'Jabatan',
                 'rules' => 'required'
-            ]
+            ],
+            [
+                'field' => 'nomerTelepon',
+                'label' => '*No.Telp',
+                'rules' => 'required|integer'
+            ],
+            [
+                'field' => 'nuptk',
+                'label' => '*NUPTK',
+                'rules' => 'required'
+            ],
+            
+            [
+                'field' => 'tempatLahir',
+                'label' => '*Tempat Lahir',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'tanggalLahir',
+                'label' => '*Tanggal Lahir',
+                'rules' => 'required'
+            ],
+            
+            [
+                'field' => 'Status',
+                'label' => '*Status',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'ijazahTerakhirTahun',
+                'label' => '*Ijazah Terakhir Tahun',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'mulaiBekerja',
+                'label' => '*Mulai Bekerja',
+                'rules' => 'required'
+            ],
+            
+
         ];
 
         $this->form_validation->set_rules($rules);
@@ -824,7 +1052,17 @@ class Dashboard extends CI_Controller
         else{
 	        $datastaff['nama']   = set_value('nama');
 	        $datastaff['jabatan']   = set_value('jabatan');
-	        //$datagallery['status']   = set_value('radioOption');
+	        $datastaff['NIP' ]         = set_value('nip');
+            $datastaff['jabatan' ]  = set_value('jabatan');
+            $datastaff['status'  ]      = set_value('Status');
+            $datastaff['NUPTK' ]       = set_value('nuptk');
+            $datastaff['tempat_lahir'] = set_value('tempatLahir');
+            $datastaff['tanggal_lahir' ]       = set_value('tanggalLahir');
+            $datastaff['gol' ]       = set_value('Gol');
+            $datastaff['ijazah_terakhir_tahun' ]       = set_value('ijazahTerakhirTahun');
+            $datastaff['mulai_bekerja']        = set_value('mulaiBekerja');
+            $datastaff['nomer_telepon']        = set_value('nomerTelepon');
+            $datastaff['keterangan' ]       = set_value('Keterangan');
 
 	        $this->staff_model->updateGuru($id,$datastaff);
 	        $this->session->set_flashdata('message','Data guru telah diperbarui...');
@@ -927,8 +1165,10 @@ class Dashboard extends CI_Controller
      {
      	$this->print_model->reset();
      	$this->session->set_flashdata('message','Data semua sudah direset');
-        redirect('admin/dashboard/pendaftaranf');
+        redirect('admin/dashboard/pendaftaran');
      }
+
+     
 
 }
  ?>

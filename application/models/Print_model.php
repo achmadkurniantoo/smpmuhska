@@ -27,6 +27,6 @@ class Print_model extends CI_Model {
 	}
 	function reset()
 	{
-		$this->db->truncate('form_pendaftaran');
+		$query=$this->db->query('TRUNCATE TABLE form_pendaftaran');
 	}
 }
